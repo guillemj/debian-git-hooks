@@ -48,5 +48,5 @@ while read oldrev newrev refname; do
 
     git format-patch --subject-prefix="$projectname/${refname#refs/heads/}" \
 		     --stdout "$oldrev..$newrev" |
-		     formail -b -s formail -b -I "To: $recipients" -I "From " -s /usr/sbin/sendmail -t
+		     formail -b -s formail -b -I "To: $recipients" -I "From " -s /usr/sbin/sendmail -oi -t
 done

@@ -42,11 +42,13 @@ isnull () {
 
 while read oldrev newrev refname; do
     if isnull "$oldrev" || isnull "$newrev"; then
-       	echo >&2 '[hooks/post-receive] Warning: creation or deletion of branches not supported'
-       	continue
+        echo >&2 '[hooks/post-receive] Warning: creation or deletion of branches not supported'
+        continue
     fi
 
     git format-patch --subject-prefix="$projectname/${refname#refs/heads/}" \
-		     --stdout "$oldrev..$newrev" |
-		     formail -b -s formail -b -I "To: $recipients" -I "From " -s /usr/sbin/sendmail -oi -t
+                     --stdout "$oldrev..$newrev" |
+                     formail -b -s formail -b -I "To: $recipients" -I "From " -s /usr/sbin/sendmail -oi -t
 done
+
+# vim: et

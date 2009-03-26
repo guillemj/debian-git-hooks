@@ -46,8 +46,8 @@ thanks
 
 Hello,
 
-Bug #$bug reported with you has been fixed in the Git repository. You
-can see the changelog below, and you can check the diff of the fix at:
+Bug #$bug reported by you has been fixed in the Git repository. You can
+see the changelog below, and you can check the diff of the fix at:
 
     ${BASEURL};a=commitdiff;h=`git show -s --pretty='format:%h' "$rev"`
 

@@ -35,6 +35,9 @@ To: $bug-submitter@bugs.debian.org
 Bcc: control@bugs.debian.org
 Subject: Bug#$bug marked as pending
 X-Mailer: http://snipr.com/post-receive-tag-pending
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
 tag $bug pending
 thanks

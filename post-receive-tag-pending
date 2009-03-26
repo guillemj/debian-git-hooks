@@ -29,7 +29,7 @@ send_mail() { # send_mail bugno revno diff_file
     local bug="$1"
     local rev="$2"
     local diff="$3"
-    local from=$(git show -s --pretty='format:"%cn" <%ce>' $rev |
+    local from=$(git show -s --pretty='format:%cn <%ce>' $rev |
                  perl -MEncode -e 'print Encode::encode("MIME-Q", <STDIN>);')
     (cat <<EOF
 From: $from

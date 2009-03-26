@@ -29,8 +29,10 @@ send_mail() { # send_mail bugno revno diff_file
     local bug="$1"
     local rev="$2"
     local diff="$3"
+    local from=$(git show -s --pretty='format:"%an" <%ae>' $rev |
+                 perl -MEncode -e 'print Encode::encode("MIME-Q", <STDIN>);')
     (cat <<EOF
-From: `git show -s --pretty='format:%an <%ae>' $rev`
+From: $from
 To: $bug-submitter@bugs.debian.org
 Bcc: control@bugs.debian.org
 Subject: Bug#$bug marked as pending

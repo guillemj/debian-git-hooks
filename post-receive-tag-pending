@@ -18,7 +18,7 @@
 set -e
 set -u
 
-REPODIR=`readlink -f $PWD`
+REPODIR=`readlink -f "$PWD"`
 REPOREL=${REPODIR#/srv/git.debian.org/git/}
 BASEURL="http://git.debian.org/?p=$REPOREL"
 

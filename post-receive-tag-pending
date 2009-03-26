@@ -30,7 +30,7 @@ send_mail() { # send_mail bugno revno diff_file
     local rev="$2"
     local diff="$3"
     (cat <<EOF
-From: `git show -s --pretty='%an <%ae>' $rev`
+From: `git show -s --pretty='format:%an <%ae>' $rev`
 To: $bug-submitter@bugs.debian.org
 Bcc: control@bugs.debian.org
 Subject: Bug#$bug marked as pending
@@ -44,7 +44,7 @@ Hello,
 Bug #$bug reported with you has been fixed in the Git repository. You
 can see the changelog below, and you can check the diff of the fix at:
 
-    ${BASEURL};a=commitdiff;h=`git show -s --pretty=%h "$rev"`
+    ${BASEURL};a=commitdiff;h=`git show -s --pretty='format:%h' "$rev"`
 
 ---
 EOF

@@ -58,7 +58,7 @@ EOF
 
 while read oldrev newrev refname; do
     begin="$oldrev"
-    git rev-list "${oldrev}..${newrev}" | tac |
+    git rev-list --reverse "${oldrev}..${newrev}" |
     while read rev; do
         c="$tempdir/$rev.changelog"
         d="$tempdir/$rev.diff"

@@ -53,7 +53,7 @@ see the changelog below, and you can check the diff of the fix at:
 
 ---
 EOF
-    cat "$d") | /usr/sbin/sendmail -oi -t
+    cat "$diff") | /usr/sbin/sendmail -oi -t
 }
 
 while read oldrev newrev refname; do

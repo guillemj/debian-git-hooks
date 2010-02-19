@@ -59,13 +59,12 @@ EOF
 }
 
 while read oldrev newrev refname; do
-    begin="$oldrev"
     git rev-parse --not --branches | grep -v $(git rev-parse $refname) |
     git rev-list --reverse --stdin "${oldrev}..${newrev}" |
     while read rev; do
         c="$tempdir/$rev.changelog"
         d="$tempdir/$rev.diff"
-        git show ${rev}:debian/changelog >"$c"
+        git show ${rev}:debian/changelog >"$c" 2>/dev/null
         git show ${rev} -- debian/changelog >"$d"
         bugs=`dpkg-parsechangelog -l"$c" | sed -rne 's/^Closes: *//p'`
         for bug in $bugs; do

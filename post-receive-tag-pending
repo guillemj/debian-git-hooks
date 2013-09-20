@@ -36,15 +36,13 @@ send_mail() { # send_mail bugno revno diff_file
     (cat <<EOF
 From: $from
 To: $bug-submitter@bugs.debian.org
-Bcc: control@bugs.debian.org
 Subject: Bug#$bug marked as pending
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
 X-Mailer: http://snipr.com/post-receive-tag-pending
 
-tag $bug pending
-thanks
+Control: tag $bug pending
 
 Hello,
 

@@ -1,6 +1,7 @@
 #! /bin/bash
 #
-# Copyright (c) 2009 Adeodato Simó (dato@net.com.org.es)
+# Copyright © 2009 Adeodato Simó (dato@net.com.org.es)
+# Copyright © 2013-2015 Guillem Jover <guillem@debian.org>
 #
 # This software may be used and distributed according to the terms
 # of the MIT License, incorporated herein by reference.
@@ -18,11 +19,22 @@
 set -e
 set -u
 
+# Web interfaces supported: cgit, gitweb
+REPOWEB=cgit
 REPODIR=`readlink -f "$PWD"`
 REPOREL=${REPODIR#/srv/git.debian.org/git/}
 REPOREL=${REPOREL#/srv/alioth.debian.org/chroot/home/}
 REPOREL=${REPOREL/\/public_git\//\/}
-BASEURL="https://git.debian.org/?p=$REPOREL"
+BASEURL="https://anonscm.debian.org"
+
+case "$REPOWEB" in
+cgit)
+    REPOURL="$BASEURL/diff/$REPOREL/?id="
+    ;;
+gitweb)
+    REPOURL="$BASEURL/?p=$REPOREL;a=commitdiff;h="
+    ;;
+esac
 
 tempdir=`mktemp -d`
 trap "rm -rf \"${tempdir}\"" EXIT
@@ -49,7 +61,7 @@ Hello,
 Bug #$bug reported by you has been fixed in the Git repository. You can
 see the changelog below, and you can check the diff of the fix at:
 
-    ${BASEURL};a=commitdiff;h=`git show -s --pretty='format:%h' "$rev"`
+    ${REPOURL}`git show -s --pretty='format:%h' "$rev"`
 
 ---
 EOF

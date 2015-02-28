@@ -22,7 +22,7 @@ REPODIR=`readlink -f "$PWD"`
 REPOREL=${REPODIR#/srv/git.debian.org/git/}
 REPOREL=${REPOREL#/srv/alioth.debian.org/chroot/home/}
 REPOREL=${REPOREL/\/public_git\//\/}
-BASEURL="http://git.debian.org/?p=$REPOREL"
+BASEURL="https://git.debian.org/?p=$REPOREL"
 
 tempdir=`mktemp -d`
 trap "rm -rf \"${tempdir}\"" EXIT

@@ -57,7 +57,7 @@ X-Mailer: http://git.hadrons.org/cgit/debian/git-hooks.git/tree/post-receive-tag
 
 Control: tag $bug pending
 
-Hello,
+Hi!
 
 Bug #$bug in package $PACKAGE reported by you has been fixed in
 the $REPOREL Git repository. You can see the changelog below,

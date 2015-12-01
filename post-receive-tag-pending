@@ -25,6 +25,7 @@ REPODIR=`readlink -f "$PWD"`
 REPOREL=${REPODIR#/srv/git.debian.org/git/}
 REPOREL=${REPOREL#/srv/alioth.debian.org/chroot/home/}
 REPOREL=${REPOREL/\/public_git\//\/}
+PACKAGE=$(echo $REPOREL | sed -r 's:.*/(.*).git:\1:')
 BASEURL="https://anonscm.debian.org"
 
 case "$REPOWEB" in
@@ -48,7 +49,7 @@ send_mail() { # send_mail bugno revno diff_file
     (cat <<EOF
 From: $from
 To: $bug-submitter@bugs.debian.org
-Subject: Bug#$bug marked as pending
+Subject: Bug#$bug in package $PACKAGE marked as pending
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
@@ -58,9 +59,9 @@ Control: tag $bug pending
 
 Hello,
 
-Bug #$bug reported by you has been fixed in the $REPOREL Git
-repository. You can see the changelog below, and you can check the diff
-of the fix at:
+Bug #$bug in package $PACKAGE reported by you has been fixed in
+the $REPOREL Git repository. You can see the changelog below,
+and you can check the diff of the fix at:
 
     ${REPOURL}`git show -s --pretty='format:%h' "$rev"`
 

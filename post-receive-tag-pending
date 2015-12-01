@@ -58,8 +58,9 @@ Control: tag $bug pending
 
 Hello,
 
-Bug #$bug reported by you has been fixed in the Git repository. You can
-see the changelog below, and you can check the diff of the fix at:
+Bug #$bug reported by you has been fixed in the $REPOREL Git
+repository. You can see the changelog below, and you can check the diff
+of the fix at:
 
     ${REPOURL}`git show -s --pretty='format:%h' "$rev"`
 

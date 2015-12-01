@@ -25,7 +25,7 @@ REPODIR=`readlink -f "$PWD"`
 REPOREL=${REPODIR#/srv/git.debian.org/git/}
 REPOREL=${REPOREL#/srv/alioth.debian.org/chroot/home/}
 REPOREL=${REPOREL/\/public_git\//\/}
-PACKAGE=$(echo $REPOREL | sed -r 's:.*/(.*).git:\1:')
+PACKAGE=$(basename "$REPOREL" .git)
 BASEURL="https://anonscm.debian.org"
 SENDMAIL="/usr/sbin/sendmail -oi -t"
 

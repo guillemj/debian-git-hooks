@@ -52,7 +52,7 @@ Subject: Bug#$bug marked as pending
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-Mailer: http://snipr.com/post-receive-tag-pending
+X-Mailer: http://git.hadrons.org/cgit/debian/git-hooks.git/tree/post-receive-tag-pending
 
 Control: tag $bug pending
 

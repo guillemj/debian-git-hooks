@@ -84,8 +84,8 @@ Control: tag $bug pending
 Hi!
 
 Bug #$bug in package $PACKAGE reported by you has been fixed in
-the $REPOREL Git repository. You can see the changelog below,
-and you can check the diff of the fix at:
+the $REPOREL Git repository. You can see the changelog below, and
+you can check the diff of the fix at:
 
     ${REPOURL}`git show -s --pretty='format:%h' "$rev"`
 

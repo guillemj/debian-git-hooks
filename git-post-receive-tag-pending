@@ -27,6 +27,7 @@ REPOREL=${REPOREL#/srv/alioth.debian.org/chroot/home/}
 REPOREL=${REPOREL/\/public_git\//\/}
 PACKAGE=$(echo $REPOREL | sed -r 's:.*/(.*).git:\1:')
 BASEURL="https://anonscm.debian.org"
+SENDMAIL="/usr/sbin/sendmail -oi -t"
 
 case "$REPOWEB" in
 cgit)
@@ -91,7 +92,7 @@ you can check the diff of the fix at:
 
 ---
 EOF
-    cat "$diff") | /usr/sbin/sendmail -oi -t
+    cat "$diff") | $SENDMAIL
 }
 
 while read oldrev newrev refname; do

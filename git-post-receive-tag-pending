@@ -40,6 +40,30 @@ esac
 tempdir=`mktemp -d`
 trap "rm -rf \"${tempdir}\"" EXIT
 
+DPKG_VERSION=$(perl -MDpkg -e 'print $Dpkg::version')
+
+case "$DPKG_VERSION" in
+1.16.*)
+  get_bugs()
+  {
+    local rev="$1"
+    local c="$tempdir/${rev}.changelog"
+
+    git show ${rev}:debian/changelog >"$c" 2>/dev/null
+    dpkg-parsechangelog -l"$c" | sed -rne 's/^Closes: *//pi'
+  }
+  ;;
+*)
+  get_bugs()
+  {
+    local rev="$1"
+
+    git show ${rev}:debian/changelog 2>/dev/null \
+      | dpkg-parsechangelog -l- -SCloses
+  }
+  ;;
+esac
+
 send_mail() { # send_mail bugno revno diff_file
     local bug="$1"
     local rev="$2"
@@ -76,8 +100,7 @@ while read oldrev newrev refname; do
     while read rev; do
         d="$tempdir/$rev.diff"
         git show ${rev} -- debian/changelog >"$d"
-        bugs=`git show ${rev}:debian/changelog 2>/dev/null | \
-              dpkg-parsechangelog -l- -SCloses`
+        bugs=`get_bugs ${rev}`
         for bug in $bugs; do
             if  grep -qE '^\+.*\<'$bug'\>' "$d" &&
               ! grep -qE  '^-.*\<'$bug'\>' "$d"; then

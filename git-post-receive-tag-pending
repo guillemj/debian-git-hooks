@@ -31,7 +31,7 @@ SENDMAIL="/usr/sbin/sendmail -oi -t"
 
 case "$REPOWEB" in
 cgit)
-    REPOURL="$BASEURL/diff/$REPOREL/?id="
+    REPOURL="$BASEURL/cgit/$REPOREL/diff/?id="
     ;;
 gitweb)
     REPOURL="$BASEURL/?p=$REPOREL;a=commitdiff;h="
